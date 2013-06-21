@@ -74,6 +74,7 @@
             this.Controls.Add(this.rtxt_chatlog);
             this.Name = "mainForm";
             this.Text = "SLSGAI";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

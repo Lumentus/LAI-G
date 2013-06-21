@@ -12,12 +12,12 @@ namespace SLSGAI
 {
     public partial class mainForm : Form
     {
-        private KI ki;
+        private AI ki;
 
         public mainForm()
         {
             InitializeComponent();
-            ki = new KI("Test.dbx");
+            ki = new AI(this);
         }
 
         private void rtxt_chatlog_TextChanged(object sender, EventArgs e)
@@ -50,21 +50,12 @@ namespace SLSGAI
 
         private void passMessageToAI()
         {
-            Boolean startGame;
             this.showMessage(txt_msg.Text, "User");
-            String ret = "";
-            startGame = ki.analyseMessage(txt_msg.Text, ref ret);
-            showMessage(ret, ki.Name);
-            if (startGame)
-            {
-            }
-            else
-            {
-            }
+            ki.analyseMessage(txt_msg.Text);
             txt_msg.Text = "";
         }
 
-        private void showMessage(String msg, String person)
+        public void showMessage(String msg, String person)
         {
             if (rtxt_chatlog.Text == "")
             {
@@ -79,6 +70,16 @@ namespace SLSGAI
         private void mainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            shutdown();
+        }
+
+        public void shutdown()
+        {
+            Application.Exit();
         }
     }
 }
